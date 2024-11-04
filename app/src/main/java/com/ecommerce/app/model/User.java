@@ -34,11 +34,11 @@ public class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int userId;
+	private long userId;
 	
 	@NotBlank
 	@Size(max=20)
-	private String userName;
+	private String username;
 	
 	@NotBlank
 	@Size(max=50)
@@ -71,12 +71,22 @@ public class User {
 			@NotBlank @Size(max = 150) String password, Set<Role> roles, Set<Address> addresses,
 			Set<Product> prodcuts) {
 		super();
-		this.userName = userName;
+		this.username = username;
 		this.email = email;
 		this.password = password;
 		this.roles = roles;
 		this.addresses = addresses;
 		this.prodcuts = prodcuts;
+	}
+
+
+	public long getUserId() {
+		return userId;
+	}
+
+
+	public void setUserId(long userId) {
+		this.userId = userId;
 	}
 
 
@@ -86,13 +96,13 @@ public class User {
 	}
 
 
-	public String getUserName() {
-		return userName;
+	public String getUsername() {
+		return username;
 	}
 
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUsername(String userName) {
+		this.username = userName;
 	}
 
 

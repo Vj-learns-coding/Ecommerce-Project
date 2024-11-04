@@ -26,7 +26,7 @@ public class Role {
 	private AppRole roleName;
 
 	
-	
+//	 enum contains .name() method which  returns string of the variable
 	public Role() {
 		super();
 		// TODO Auto-generated constructor stub
