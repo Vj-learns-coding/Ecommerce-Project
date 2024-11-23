@@ -1,14 +1,15 @@
 package com.ecommerce.app.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.OneToMany;
 
 
 
@@ -35,8 +36,27 @@ public class Product {
 	@ManyToOne
 	@JoinColumn(name="seller_id")
 	private User user;
+	
+	@OneToMany(mappedBy="product")
+	private List<CartItem> cartItems=new ArrayList<>();
 
 	
+
+//	public Product(long productId, double discount, String productName, String description, int quantity, double price,
+//			double specialPrice, String image, Category category, User user, List<CartItem> cartItems) {
+//		super();
+//		this.productId = productId;
+//		this.discount = discount;
+//		this.productName = productName;
+//		this.description = description;
+//		this.quantity = quantity;
+//		this.price = price;
+//		this.specialPrice = specialPrice;
+//		this.image = image;
+//		this.category = category;
+//		this.user = user;
+//		this.cartItems = cartItems;
+//	}
 
 	public Product(double discount, String productName, String description, int quantity, double price,
 			double specialPrice, String image, Category category, User user) {
@@ -127,6 +147,22 @@ public class Product {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public long getProductId() {
+		return productId;
+	}
+
+	public void setProductId(long productId) {
+		this.productId = productId;
+	}
+
+	public List<CartItem> getCartItems() {
+		return cartItems;
+	}
+
+	public void setCartItems(List<CartItem> cartItems) {
+		this.cartItems = cartItems;
 	}
 	
 

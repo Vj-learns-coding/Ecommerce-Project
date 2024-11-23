@@ -1,8 +1,12 @@
-package com.ecommerce.app.security.jwt;
+package com.ecommerce.app.security.request;
+
+import jakarta.validation.constraints.NotBlank;
 
 public class LoginRequest {
 	
+	@NotBlank
 	private String username;
+	@NotBlank
 	private String password;
 	
 	public LoginRequest(String username, String password) {

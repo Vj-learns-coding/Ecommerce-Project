@@ -15,18 +15,16 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name="Users",uniqueConstraints= {
-		@UniqueConstraint(columnNames="userName"),
+		@UniqueConstraint(columnNames="username"),
 		@UniqueConstraint(columnNames="email")
 	})
 
@@ -38,6 +36,7 @@ public class User {
 	
 	@NotBlank
 	@Size(max=20)
+	
 	private String username;
 	
 	@NotBlank
@@ -50,6 +49,13 @@ public class User {
 	private String password;
 	
 	
+	@OneToOne(mappedBy="user",cascade= {CascadeType.MERGE,CascadeType.PERSIST,CascadeType.PERSIST},orphanRemoval=true)
+	private Cart cart;
+	
+	
+
+
+
 	@ManyToMany(cascade= {CascadeType.PERSIST,CascadeType.MERGE},fetch=FetchType.EAGER)
 	@JoinTable(name="user_role",
 			joinColumns=@JoinColumn(name="user_id"),
@@ -78,6 +84,19 @@ public class User {
 		this.addresses = addresses;
 		this.prodcuts = prodcuts;
 	}
+	
+	
+
+
+	public User(@NotBlank @Size(max = 20) String username, @NotBlank @Size(max = 50) @Email String email,
+			@NotBlank @Size(max = 150) String password) {
+		super();
+		this.username = username;
+		this.email = email;
+		this.password = password;
+	}
+
+
 
 
 	public long getUserId() {
@@ -155,7 +174,14 @@ public class User {
 		this.prodcuts = prodcuts;
 	}
 
+	public Cart getCart() {
+		return cart;
+	}
 
+
+	public void setCart(Cart cart) {
+		this.cart = cart;
+	}
 
 
 }

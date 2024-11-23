@@ -19,7 +19,7 @@ public class Role {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int roleId;
+	private long roleId;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(length=20)
@@ -43,6 +43,14 @@ public class Role {
 
 	public void setRoleName(AppRole roleName) {
 		this.roleName = roleName;
+	}
+
+	public long getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(long roleId) {
+		this.roleId = roleId;
 	}
 
 	

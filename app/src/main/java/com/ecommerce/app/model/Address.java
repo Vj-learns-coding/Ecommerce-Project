@@ -131,6 +131,14 @@ public class Address {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+	public int getAddressId() {
+		return addressId;
+	}
+
+	public void setAddressId(int addressId) {
+		this.addressId = addressId;
+	}
 	
 	
 }
