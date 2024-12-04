@@ -2,7 +2,9 @@ package com.ecommerce.app.model;
 
 
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import jakarta.persistence.CascadeType;
@@ -62,11 +64,11 @@ public class User {
 			inverseJoinColumns=@JoinColumn(name="role_id"))
 	private Set<Role> roles = new HashSet<>();
 	
-	@ManyToMany(cascade= {CascadeType.PERSIST,CascadeType.MERGE},fetch=FetchType.EAGER)
-	@JoinTable(name="user_address",
-			joinColumns=@JoinColumn(name="user_id"),
-			inverseJoinColumns=@JoinColumn(name="address_id"))
-	private Set<Address> addresses = new HashSet<>();
+	@OneToMany(mappedBy="user",cascade= {CascadeType.PERSIST,CascadeType.MERGE},fetch=FetchType.EAGER,orphanRemoval=true)
+//	@JoinTable(name="user_address",
+//			joinColumns=@JoinColumn(name="user_id"),
+//			inverseJoinColumns=@JoinColumn(name="address_id"))
+	private List<Address> addresses = new ArrayList<>();
 	
 	
 	@OneToMany(mappedBy="user",cascade= {CascadeType.PERSIST,CascadeType.MERGE},orphanRemoval=true)
@@ -74,7 +76,7 @@ public class User {
 
 
 	public User(@NotBlank @Size(max = 20) String userName, @NotBlank @Size(max = 50) @Email String email,
-			@NotBlank @Size(max = 150) String password, Set<Role> roles, Set<Address> addresses,
+			@NotBlank @Size(max = 150) String password, Set<Role> roles, List<Address> addresses,
 			Set<Product> prodcuts) {
 		super();
 		this.username = username;
@@ -155,12 +157,12 @@ public class User {
 	}
 
 
-	public Set<Address> getAddresses() {
+	public List<Address> getAddresses() {
 		return addresses;
 	}
 
 
-	public void setAddresses(Set<Address> addresses) {
+	public void setAddresses(List<Address> addresses) {
 		this.addresses = addresses;
 	}
 

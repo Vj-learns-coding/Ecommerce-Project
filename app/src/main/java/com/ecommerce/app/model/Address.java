@@ -1,19 +1,16 @@
 package com.ecommerce.app.model;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Entity
@@ -51,8 +48,9 @@ public class Address {
 	private String pincode;
 	
 	@ToString.Exclude
-	@ManyToMany(mappedBy="addresses")
-	private Set<User> users = new HashSet<>();// should be a list.
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	private User user;
 
 	public String getStreetName() {
 		return streetName;
@@ -102,12 +100,12 @@ public class Address {
 		this.pincode = pincode;
 	}
 
-	public Set<User> getUsers() {
-		return users;
+	public User getUsers() {
+		return user;
 	}
 
-	public void setUsers(Set<User> users) {
-		this.users = users;
+	public void setUsers(User user) {
+		this.user = user;
 	}
 
 	public Address(@NotBlank @Size(min = 5, message = "street name should be more than 5 characters") String streetName,
@@ -116,15 +114,15 @@ public class Address {
 			@NotBlank @Size(min = 2, message = "state name should be more than 2 characters") String state,
 			@NotBlank @Size(min = 5, message = "country name should be more than 5 characters") String country,
 			@NotBlank @Size(min = 6, message = "pincode should be more than 5 characters") String pincode,
-			Set<User> users) {
+			User user) {
 		super();
 		this.streetName = streetName;
 		this.buildingName = buildingName;
 		this.city = city;
-		State = state;
+		this.State = state;
 		this.country = country;
 		this.pincode = pincode;
-		this.users = users;
+		this.user = user;
 	}
 
 	public Address() {
