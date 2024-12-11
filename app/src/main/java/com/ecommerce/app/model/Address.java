@@ -21,7 +21,7 @@ public class Address {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int addressId;
+	private long addressId;
 	
 	@NotBlank
 	@Size(min=5,message="street name should be more than 5 characters")
@@ -130,11 +130,11 @@ public class Address {
 		// TODO Auto-generated constructor stub
 	}
 
-	public int getAddressId() {
+	public long getAddressId() {
 		return addressId;
 	}
 
-	public void setAddressId(int addressId) {
+	public void setAddressId(long addressId) {
 		this.addressId = addressId;
 	}
 	

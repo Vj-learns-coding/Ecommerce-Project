@@ -58,8 +58,7 @@ public class AddressController {
 		return new ResponseEntity<>(savedAddressDto,HttpStatus.OK);
 	}
 	
-	
-	
+
 	@GetMapping("/user/addresses")
 	public ResponseEntity<List<AddressDTO>> getUserAddresses(){
 		

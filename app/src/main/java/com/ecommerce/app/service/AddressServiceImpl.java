@@ -62,7 +62,7 @@ public class AddressServiceImpl implements AddressService {
 	}
 
 	@Override
-	public AddressDTO getAddressById(int addressId) {
+	public AddressDTO getAddressById(long addressId) {
 		Address address;
 		Optional<Address> optionalAddress = addressRepository.findById(addressId);
 		
@@ -89,7 +89,7 @@ public class AddressServiceImpl implements AddressService {
 	}
 
 	@Override
-	public AddressDTO UpdateAddressById(int addressId, AddressDTO addressDto) {
+	public AddressDTO UpdateAddressById(long addressId, AddressDTO addressDto) {
 		Address address;
 		Optional<Address> optionalAddress = addressRepository.findById(addressId);
 		
@@ -119,7 +119,7 @@ public class AddressServiceImpl implements AddressService {
 	}
 
 	@Override
-	public String deleteAddressById(int addressId) {
+	public String deleteAddressById(long addressId) {
 		Address address;
 		Optional<Address> optionalAddress = addressRepository.findById(addressId);
 		

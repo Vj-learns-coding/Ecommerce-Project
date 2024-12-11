@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.ecommerce.app.model.Address;
 
 @Repository
-public interface AddressRepository extends JpaRepository<Address, Integer> {
+public interface AddressRepository extends JpaRepository<Address, Long> {
 
 	@Query("select c from Address c where c.user.id =?1")
 	List<Address> findAddressByUser(long userId);

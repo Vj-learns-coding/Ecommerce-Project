@@ -8,8 +8,8 @@ public interface AddressService {
 	
 	AddressDTO createAddress(AddressDTO addressDto);
 	List<AddressDTO> getAddress();
-	AddressDTO getAddressById(int addressId);
+	AddressDTO getAddressById(long addressId);
 	List<AddressDTO> getUserAddresses();
-	AddressDTO UpdateAddressById(int addressId, AddressDTO address);
-	String deleteAddressById(int addressId);
+	AddressDTO UpdateAddressById(long addressId, AddressDTO address);
+	String deleteAddressById(long addressId);
 }
