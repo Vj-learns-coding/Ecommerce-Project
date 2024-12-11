@@ -1,15 +1,20 @@
 package com.ecommerce.app.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 
 
 @Entity
+
 public class Product {
 	
 	@Id
@@ -28,49 +33,56 @@ public class Product {
 	@JoinColumn(name="category_id")
 	private Category category;
 	
-	public Product(long productId, double discount, String productName, String description, int quantity, String image,double price,
-			double specialPrice, Category category) {
+	@ManyToOne
+	@JoinColumn(name="seller_id")
+	private User user;
+	
+	@OneToMany(mappedBy="product")
+	private List<CartItem> cartItems=new ArrayList<>();
+
+	
+
+//	public Product(long productId, double discount, String productName, String description, int quantity, double price,
+//			double specialPrice, String image, Category category, User user, List<CartItem> cartItems) {
+//		super();
+//		this.productId = productId;
+//		this.discount = discount;
+//		this.productName = productName;
+//		this.description = description;
+//		this.quantity = quantity;
+//		this.price = price;
+//		this.specialPrice = specialPrice;
+//		this.image = image;
+//		this.category = category;
+//		this.user = user;
+//		this.cartItems = cartItems;
+//	}
+
+	public Product(double discount, String productName, String description, int quantity, double price,
+			double specialPrice, String image, Category category, User user) {
 		super();
-		this.productId = productId;
 		this.discount = discount;
 		this.productName = productName;
 		this.description = description;
 		this.quantity = quantity;
 		this.price = price;
 		this.specialPrice = specialPrice;
-		this.category = category;
 		this.image = image;
+		this.category = category;
+		this.user = user;
 	}
-	
-	
 
 	public Product() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
-
-
-	
-	
-
-	public String getImage() {
-		return image;
+	public double getDiscount() {
+		return discount;
 	}
 
-
-
-	public void setImage(String image) {
-		this.image = image;
-	}
-
-
-
-	public long getProductId() {
-		return productId;
-	}
-
-	public void setProductId(long productId) {
-		this.productId = productId;
+	public void setDiscount(double discount) {
+		this.discount = discount;
 	}
 
 	public String getProductName() {
@@ -113,6 +125,14 @@ public class Product {
 		this.specialPrice = specialPrice;
 	}
 
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
 	public Category getCategory() {
 		return category;
 	}
@@ -120,15 +140,31 @@ public class Product {
 	public void setCategory(Category category) {
 		this.category = category;
 	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public long getProductId() {
+		return productId;
+	}
+
+	public void setProductId(long productId) {
+		this.productId = productId;
+	}
+
+	public List<CartItem> getCartItems() {
+		return cartItems;
+	}
+
+	public void setCartItems(List<CartItem> cartItems) {
+		this.cartItems = cartItems;
+	}
 	
-	public double getDiscount() {
-		return discount;
-	}
-
-	public void setDiscount(double discount) {
-		this.discount = discount;
-	}
-
 
 	
 
